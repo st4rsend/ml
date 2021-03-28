@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# ml models and data
+/ml-python/models
+/ml-python/data
+
 # compiled output
 /dist
 /tmp
