@@ -8,11 +8,14 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ml-angular';
-	public response = ["initial", "string"];
+  title = 'St4rsend Machine Learning (ML) corner';
+	response: ['a','b'];
 	getForm= new FormGroup({
+		inputTitle: new FormControl(''),
 		inputText: new FormControl('')
 	})
+
+	public models: string;
 
 
 	constructor(private rs: RestService){}
@@ -33,6 +36,19 @@ export class AppComponent implements OnInit {
 			(error) => {
 				console.log("Error");
 			}
+		)
+	}
+
+	getModels(){
+		this.rs.getModels().subscribe(
+			(models) => {
+				//this.models = models;
+				console.log(models);
+			},
+			(error) => {
+				console.log("Error");
+			}
+
 		)
 	}
 }

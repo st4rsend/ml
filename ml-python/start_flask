@@ -1,0 +1,5 @@
+#!/bin/bash
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate py37
+export FLASK_APP=ml.py
+/home/vince/miniconda3/envs/py37/bin/flask run

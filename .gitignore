@@ -3,6 +3,7 @@
 # ml models and data
 /ml-python/models
 /ml-python/data
+__pycache__
 
 # compiled output
 /dist

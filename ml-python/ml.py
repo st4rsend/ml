@@ -29,9 +29,14 @@ def predict(str_predict):
 	for k in title_models.keys():
 		if(title_models[k].predict(tv_title)>0):
 			ret['tags'] = ret['tags'] + [k]
-
-#	ret["tags"] = [str_predict] + ['tag A', 'tag B'] 
 	return jsonify(ret)
+
+@app.route('/flask/models/', methods=['GET'])
+def get_models():
+	return jsonify({
+		'title': [(k,title_models[k].alpha) for k in title_models.keys()],
+		'body': [(k,body_models[k].alpha) for k in body_models.keys()],
+	})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,19 +1,33 @@
 <body>
-<H1>Hello World</H1>
+<H1>St4rsend Machine Learning (ML) corner</H1>
 <div>
 	<form [formGroup]="getForm" (ngSubmit)="onSubmit()">
 		<div>
-			<input type="text" formControlName="inputText" />
+			Title
+			<input type="text" formControlName="inputTitle" />
+		</div>
+		<div>
+			Text
+			<textarea rows="10" cols="50" formControlName="inputText">
+			</textarea>
 		</div>
 		<div>
 			<button type="submit">Predict</button>
 		</div>
 	</form>
-</div>
 <b>Response: </b>
 <ul>
 <li *ngFor="let tag of response">{{ tag }}</li>
 </ul>
+</div>
+<div>
+	<h2>models</h2>
+	<button type="button" (click)="getModels()">Get Models</button>
+	<div><p>
+		{{ models }}
+		</p>
+	</div>
+</div>
 <!-- 
 <router-outlet></router-outlet>
 -->
