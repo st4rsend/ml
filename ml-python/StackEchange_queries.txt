@@ -1,0 +1,66 @@
+OC_DS_P6
+============
+SELECT p1.Id, p1.Title, p1.Body, p1.Tags
+FROM posts p1 
+WHERE p1.AnswerCount > 0 and p1.Score > 0 and p1.CreationDate >= '2021-01-01'
+  and p1.AcceptedAnswerId is not null 
+  and exists (
+        select 1 from PostTags pt, Tags t, posts p2, users us
+        where p1.Id = pt.PostId 
+          and pt.Tagid = t.Id 
+          and t.count > 15000
+          and p2.id = p1.acceptedanswerid 
+          and us.id = p2.owneruserid and us.reputation > 5000 and p2.score > 0)
+============
+
+OC_DS_P6_TEST
+============
+SELECT p1.Id, p1.Title, p1.Body, p1.Tags
+FROM posts p1 
+WHERE p1.AnswerCount > 0 and p1.Score > 0 and p1.CreationDate >= '2021-03-17'
+  and p1.AcceptedAnswerId is not null 
+  and exists (
+        select 1 from PostTags pt, Tags t, posts p2, users us
+        where p1.Id = pt.PostId 
+          and pt.Tagid = t.Id 
+          and t.count > 15000
+          and p2.id = p1.acceptedanswerid 
+          and us.id = p2.owneruserid and us.reputation > 5000 and p2.score > 0)
+============
+
+
+
+OC_DS_P6 Top Tags
+============
+SELECT * 
+FROM Tags
+where count > 15000
+order by Count desc
+==============
+SELECT * 
+FROM  Tags as T left join TagSynonyms as TS
+ON T.TagName = TS.TargetTagName
+where count > 100000
+order by Count desc
+==============================
+
+
+SELECT P.Id, P.score,P.Title, P.Tags, P.Body, C.Id, C.score, C.Text
+FROM Posts as P left join Comments as C
+ON P.Id = C.PostId
+WHERE P.Id > 59551200 and P.Id < 59551210
+
+=========================
+
+SELECT P.Id, P.score,P.Title, P.Tags, P.Body
+FROM posts as P
+WHERE (Id = 59551201) OR (ParentId = 59551201)
+
+======================
+
+SELECT P.Id, P.score,P.Title, P.Tags, P.Body, C.Id, C.score, C.Text
+FROM posts as P left join Comments as C
+ON P.Id = C.PostId
+WHERE ParentId = 59551201
+
+================================
