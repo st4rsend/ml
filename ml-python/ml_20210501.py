@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
 import os
 from joblib import dump, load
@@ -21,22 +21,14 @@ ret = {
 
 app = Flask(__name__)
 # CORS(app)
-@app.route('/flask/predict/', methods=['POST'])
-def predict():
-	data = request.json
-	title = data['title'];
-	body = data['body'];
-	threshold = data['threshold'];
-	tv_title = title_vectorizer.transform([title])
-	tv_body = body_vectorizer.transform([body])
+@app.route('/flask/predict/<string:str_predict>', methods=['GET'])
+def predict(str_predict):
+	tv_title = title_vectorizer.transform([str_predict])
+	tv_body = body_vectorizer.transform([str_predict])
 	ret = {"tags": []}
 	for k in title_models.keys():
-		if(title_models[k].predict(tv_title)>threshold):
+		if(title_models[k].predict(tv_title)>0):
 			ret['tags'] = ret['tags'] + [k]
-	for k in body_models.keys():
-		if(body_models[k].predict(tv_body)>threshold):
-			ret['tags'] = ret['tags'] + [k]
-	ret['tags'] = list(set(ret['tags']))
 	return jsonify(ret)
 
 @app.route('/flask/models/', methods=['GET'])

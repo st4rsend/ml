@@ -27,8 +27,17 @@ export class AppComponent implements OnInit {
 	}
 
 	onSubmit(){
-		console.log(this.getForm.get('inputText').value);
-		this.rs.predict(this.getForm.get('inputText').value).subscribe(
+		var model = "baseline";
+		var threshold = 0;
+		var json = {
+			"model": model,
+ 			"threshold": threshold,
+ 			"title": this.getForm.get('inputTitle').value,
+ 			"body": this.getForm.get('inputText').value
+		};
+		this.rs.predict(
+						json
+					).subscribe(
 			(response) => {
 				this.response = response["tags"];
 				//console.log(response['tags']);

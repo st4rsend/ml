@@ -8,21 +8,19 @@ export class RestService {
 
   constructor(private http : HttpClient) {}
 
-	//soUrl : string = "https://st4rsend.net/flask/predict/";
 	soUrl : string = "https://st4rsend.net/flask/";
 
-	predict(str) {
+	predict(json) {
 		let urlStr: string;
-		urlStr = this.soUrl + 'predict/' + str;
-		//urlStr = this.soUrl + 'python';
-		console.log(urlStr)
-		return this.http.get(urlStr);
+		urlStr = this.soUrl +'predict/';
+		//console.log(json);
+		return this.http.post(urlStr, json);
 	}
 
 	getModels() {
 		let urlStr: string;
 		urlStr = this.soUrl + 'models/';
-		console.log(urlStr);
+		//console.log(urlStr);
 		return this.http.get(urlStr);
 
 	}
