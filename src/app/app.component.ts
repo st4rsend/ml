@@ -27,8 +27,9 @@ export class AppComponent implements OnInit {
 	}
 
 	onSubmit(){
-		var model = "baseline";
-		var threshold = 0;
+		//var model = "baseline";
+		var model = "vector";
+		var threshold = .20;
 		var json = {
 			"model": model,
  			"threshold": threshold,

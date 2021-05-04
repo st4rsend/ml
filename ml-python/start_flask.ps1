@@ -1,2 +1,2 @@
-$env:FLASK_APP = "P5_XX_flask.py"
+$env:FLASK_APP = "ml_local.py"
 flask run 
